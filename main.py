@@ -10,6 +10,9 @@ from functions.valor import Valor
 from functions.ano import Ano
 from functions.conta2 import Conta2
 from functions.obs import Obs
+from functions.mes import Mes
+
+from create import create_excel
 
 # Create the main window
 window = tk.Tk()
@@ -23,35 +26,54 @@ inputs_dict = {}
 def inputs():
     global inputs_dict  # Reference the global dictionary
     Classe(window, "Classe:", inputs_dict)
-    Conta(window, "Conta:", inputs_dict)
     Fc(window, "FC:", inputs_dict)
+    Conta(window, "Conta:", inputs_dict)
     Descri(window, "Descrição:", inputs_dict)
     Fornecedor(window, "Fornecedor:", inputs_dict)
     Data(window, "Data:", inputs_dict)
     Competencia(window, "Competência:", inputs_dict)
     Valor(window, "Valor:", inputs_dict)
+    Mes(window, "Mes:", inputs_dict)
     Ano(window, "Ano:", inputs_dict)
     Conta2(window, "Conta2:", inputs_dict)
     Obs(window, "Observação:", inputs_dict)
 
 
+data = [
+    ["CLASSE", "FC", "CONTA", "DESCRIÇÃO", "FORNECEDOR", "DATA", "COMPETÊNCIA", "VALOR", "MES", "ANO", "CONTA2", "OBS"]
+]
 
-# Function to retrieve values from the input fields
+# Function to retrieve values from the input fields and reset them
 def get_values():
-    # Retrieve values from the global dictionary
+    variables = {}  # Dictionary to store variable values
     for key, entry in inputs_dict.items():
-        print(f"{key}: {entry.get()}")
+        variables[key] = entry.get()  # Get the value of each input field
 
-# Function to submit the values when button is pressed
-def Submit():
-    get_values()
+    list = []
 
-# Add submit button
-submit_button = tk.Button(window, text="Enviar", command=Submit)
-submit_button.pack(pady=20)
+    # Print each variable for demonstration
+    for var_name, value in variables.items():  # Get the values of inputs EX: "Class" : "information"
+        # Put the values in data at list and append on data
+        list.append(value)               
+        print(f"{var_name}: {value}")  # Print the values
+    data.append(list)
+
+    # Clear all input fields after retrieving the values
+    for entry in inputs_dict.values():
+        entry.delete(0, tk.END)  # Reset each input field
+
+    return variables
 
 # Call the input functions to create all the fields
 inputs()
+
+# Add submit button
+submit_button = tk.Button(window, text="Enviar", command=get_values)
+submit_button.pack(pady=20)
+
+# Add create excel button
+create = tk.Button(window, text="CRIAR EXCEL", command=lambda: create_excel(data=data, fileName="Listão.xlsx", inf=True))
+create.pack(pady=20)
 
 # Run the application
 window.mainloop()
