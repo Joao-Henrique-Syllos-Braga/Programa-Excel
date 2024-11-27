@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Ano(window, labelText):
+def Ano(window, labelText, inputs_dict):
     containerAno = tk.Frame(window, bg="lightgray")
     containerAno.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Ano(window, labelText):
 
     inputAno = tk.Entry(containerAno, width=40)
     inputAno.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputAno

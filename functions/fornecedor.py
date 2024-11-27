@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Fornecedor(window, labelText):
+def Fornecedor(window, labelText, inputs_dict):
     containerFornecedor = tk.Frame(window, bg="lightgray")
     containerFornecedor.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Fornecedor(window, labelText):
 
     inputFornecedor = tk.Entry(containerFornecedor, width=40)
     inputFornecedor.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputFornecedor

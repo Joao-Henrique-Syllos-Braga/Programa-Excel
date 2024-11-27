@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Conta(window, labelText):
+def Conta(window, labelText, inputs_dict):
     containerConta = tk.Frame(window, bg="lightgray")
     containerConta.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Conta(window, labelText):
 
     inputConta = tk.Entry(containerConta, width=40)
     inputConta.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputConta

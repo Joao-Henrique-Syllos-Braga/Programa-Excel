@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Fc(window, labelText):
+def Fc(window, labelText, inputs_dict):
     containerFc = tk.Frame(window, bg="lightgray")
     containerFc.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Fc(window, labelText):
 
     inputFc = tk.Entry(containerFc, width=40)
     inputFc.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputFc

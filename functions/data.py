@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Data(window, labelText):
+def Data(window, labelText, inputs_dict):
     containerData = tk.Frame(window, bg="lightgray")
     containerData.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Data(window, labelText):
 
     inputData = tk.Entry(containerData, width=40)
     inputData.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputData

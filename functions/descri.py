@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Descri(window, labelText):
+def Descri(window, labelText, inputs_dict):
     containerDescri = tk.Frame(window, bg="lightgray")
     containerDescri.pack(fill="x", padx=10, pady=5)
 
@@ -9,3 +9,5 @@ def Descri(window, labelText):
 
     inputDescri = tk.Entry(containerDescri, width=40)
     inputDescri.pack(side="left", padx=5)
+
+    inputs_dict[labelText] = inputDescri
