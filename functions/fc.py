@@ -1,5 +1,7 @@
 import tkinter as tk
 
+#Saida / Entrada / Aporte / Envestimneto / Emprestimo - B
+
 def Fc(window, labelText, inputs_dict):
     containerFc = tk.Frame(window, bg="lightgray")
     containerFc.pack(fill="x", padx=10, pady=5)

@@ -38,6 +38,31 @@ def inputs():
     Conta2(window, "Conta2:", inputs_dict)
     Obs(window, "Observação:", inputs_dict)
 
+def res(charlist):
+    n = 0
+    p = ""
+    for x in charlist:
+        if n == 2:
+            p += x
+            p += "-"
+            n += 1
+        else:
+            p += x
+            n += 1
+    return p
+
+def current(charlist):
+    n = 0
+    p = ""
+    for x in charlist:
+        if n == 2 or n == 4:  # Insert "/" at positions 2 and 4
+            p += "/"
+            p += x
+            n += 1
+        else:
+            p += x
+            n += 1
+    return p
 
 data = [
     ["CLASSE", "FC", "CONTA", "DESCRIÇÃO", "FORNECEDOR", "DATA", "COMPETÊNCIA", "VALOR", "MES", "ANO", "CONTA2", "OBS"]
@@ -50,37 +75,31 @@ def get_values():
         variables[key] = entry.get()  # Get the value of each input field
 
     values_list = []  # Rename `list` to avoid conflict with built-in `list()` function
+    charList = []
 
     # Print each variable for demonstration
     for var_name, value in variables.items():  # Get the values of inputs EX: "Class" : "information"
         # Verify if the value is ""
         if value == "":
             # Put the value ###### if the value "" -> obs, conta2
-            values_list.append("######")
-        elif var_name == "Competência:" or var_name == "Data:":
+            values_list.append("")
+        elif var_name == "Data:":
             print("1 passed")
-            formated = value.replace("/", "")  # Remove '/' characters from the date
+            formated = value.replace("/", "").replace(" ", "")
 
-            # Convert the string into a list of characters
             charList = list(formated)
 
-            # Function to format the date
-            def current(charList):
-                n = 0
-                p = ""
-                for x in charList:
-                    if n == 2 or n == 4:  # Insert "/" at positions 2 and 4
-                        p += "/"
-                        p += x
-                        n += 1
-                    else:
-                        p += x
-                        n += 1
-                return p
+            curretext = current(charList)
+            values_list.append(curretext)
+        elif var_name == "Competência:":
 
-            formatted_date = current(charList)  # Call the function to format the date
-            values_list.append(formatted_date)
-
+            formated = value.upper().replace("/", "").replace(" ", "").replace("-", "")
+            values_list.append(res(formated))
+    
+        elif var_name == "Valor:" and value.isdigit():
+            # Format as a number with thousands separator and replace commas with dots
+            formated = f"{int(value):,}".replace(",", ".")
+            values_list.append(list(formated))
         else:
             # Put the values in data at list and append on data          
             values_list.append(value)
