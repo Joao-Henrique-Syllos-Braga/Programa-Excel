@@ -13,7 +13,7 @@ def create_excel(data, fileName, inf):
     sheet.title = "Listão"
 
     # Defining the background color and font color styles
-    fill = PatternFill(start_color="1dff1d", end_color="1dff1d", fill_type="solid")
+    fill = PatternFill(start_color="1f1f1f", end_color="1f1f1f", fill_type="solid")
     font = Font(color="ffffff")
 
     # Adding the first row with styles
@@ -25,7 +25,7 @@ def create_excel(data, fileName, inf):
 
     # Adding the rest of the data rows
     for row in data[1:]:  # Iterating over the remaining data
-        if row == "":  # Check for empty rows
+        if row == " ":  # Check for empty rows
             sheet.append("######")
         else:
             sheet.append(row)

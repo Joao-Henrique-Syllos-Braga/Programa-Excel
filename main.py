@@ -49,14 +49,45 @@ def get_values():
     for key, entry in inputs_dict.items():
         variables[key] = entry.get()  # Get the value of each input field
 
-    list = []
+    values_list = []  # Rename `list` to avoid conflict with built-in `list()` function
 
     # Print each variable for demonstration
     for var_name, value in variables.items():  # Get the values of inputs EX: "Class" : "information"
-        # Put the values in data at list and append on data
-        list.append(value)               
+        # Verify if the value is ""
+        if value == "":
+            # Put the value ###### if the value "" -> obs, conta2
+            values_list.append("######")
+        elif var_name == "Competência:" or var_name == "Data:":
+            print("1 passed")
+            formated = value.replace("/", "")  # Remove '/' characters from the date
+
+            # Convert the string into a list of characters
+            charList = list(formated)
+
+            # Function to format the date
+            def current(charList):
+                n = 0
+                p = ""
+                for x in charList:
+                    if n == 2 or n == 4:  # Insert "/" at positions 2 and 4
+                        p += "/"
+                        p += x
+                        n += 1
+                    else:
+                        p += x
+                        n += 1
+                return p
+
+            formatted_date = current(charList)  # Call the function to format the date
+            values_list.append(formatted_date)
+
+        else:
+            # Put the values in data at list and append on data          
+            values_list.append(value)
+
         print(f"{var_name}: {value}")  # Print the values
-    data.append(list)
+
+    data.append(values_list)
 
     # Clear all input fields after retrieving the values
     for entry in inputs_dict.values():
